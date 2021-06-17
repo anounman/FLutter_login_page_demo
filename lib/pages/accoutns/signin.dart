@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
+import 'package:loginpage/pages/accoutns/otp.dart';
+import 'package:page_transition/page_transition.dart';
 
 
 class singin extends StatefulWidget {
@@ -13,11 +15,16 @@ class singin extends StatefulWidget {
 class _singinState extends State<singin> {
   bool isClicked = false;
   final _formkey = GlobalKey<FormState>();
-  nextpage (BuildContext context){
+  nextpage (BuildContext context)async {
     if (_formkey.currentState!.validate()) {
     setState(() {
       isClicked = true;
+       
     });
+    await Future.delayed(Duration(seconds: 1)); 
+       Navigator.pushReplacement(context, PageTransition(
+        child: OtpVerification(),
+      type: PageTransitionType.leftToRightWithFade));
     }
   }
   @override
@@ -68,12 +75,14 @@ class _singinState extends State<singin> {
                       Text("Login" , style: TextStyle(color: Colors.white),), ) ,
                       
                     ),
+                    
                 ),
             ),
                   )
                 ],
             ),
               ),
+          
           ),
       );
   }
